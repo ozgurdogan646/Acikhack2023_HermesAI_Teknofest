@@ -10,7 +10,7 @@
 - Keşifsel Veri Analizi (EDA)
   - Veri Seti İçerisindeki Sınıf Dağılımı
   - Temizlenmiş Verilerin Token, Kelime ve Karakter Uzunluğuna Göre İncelenmesi
-  - İşlenmemiş Veri Üzerindeki Stop Word lerin Analizi
+  - Temizlenmiş Veri Üzerindeki Stop Word lerin Analizi
   - Veri Seti İçerisindeki En Çok Geçen Kelimelerin İncelenmesi
   - nGram Analizi (n=2)
 - Veri Ön İşleme Aşamları
@@ -75,12 +75,20 @@
 - Metinler noktalama işareti ve ifadelerden arındırıldı. (Noktalama işaretlerine ek olarak “<”, “>” gibi ifadeler tespit edildi ve çıkartıldı. Yapılan incelemeler ile çok fazla noktalama işaretinin bulunmadığı gözlemlendi).
 
 ## <div align=center>Model Denemeleri</div>
+- Eldeki veriler ile farklı pre-trained model denemeleri yapıldı.
+- Verideki yanlış etiketlemeler düzeltilip model denemesi yapıldı. 0.04’lük bir F1 skoru artılı gözlemlendi. (tablodaki son model)
+- Binary model denemesi yapıldı. Sonuçların multi class a göre daha düşük skorlar verdiği gözlemlendi.
+- Dış veri kullanılarak model denemesi yapıldı.
+
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230085141-bf5c921f-ae38-420a-97af-0c1426714101.png"></div>
 
 #### <div align=center>Binary Model Sonuçları</div>
 <div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230088439-8d8d2be9-ad73-4847-b140-04c1c31e2f18.png"></div>
+<p align=center> Binary modelde ilk aşamada verinin ofansiflik düzeyi kontrol edildi. Multiclass mimariye göre daha başarısız sonuçlar elde edildi. Ofansiflik düzeyinden sonra target etiketlerinin tahmin edilmesiyle mevcut hatanın artırımsal bir şekilde artacağı düşünülerek binary sınıflandırma yapılmadı.</p>
 
 #### <div align=center>Multiclass Model Sonuçları</div>
+<div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230088439-8d8d2be9-ad73-4847-b140-04c1c31e2f18.png"></div>
+<p align=center>Target etiketleri kullanılarak multiclass sınıflandırma yapıldı. En başarılı 3 modelin başarı skoru test verilerinde ortalama 0.93 olarak elde edildi. Binary sınıflandırmaya göre tek aşamada tahmin yapılması ve daha yüksek başarı elde edilmesi multiclass bir model tercih etmemize neden oldu.</p>
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230086260-b96d0186-693a-4b84-aabc-0e357533e498.png"></div>
 
 ## <div align=center>En Başarılı Modellerin Karmaşıklık Matrisi (Confusion Matrix)</div>
@@ -112,11 +120,28 @@
 </div>
 
 ## <div align=center>Dış Veri İle Modelleme</div>
+<div align=center><img width="45%" src="https://user-images.githubusercontent.com/93613110/230108394-6cfbcd72-3c82-47a3-901a-8aea22d27cf2.png"></div>
+<div align=center><img width="45%" src="https://user-images.githubusercontent.com/93613110/230108411-a0692c85-515c-4bf6-a37c-e02e7cac7add.png"></div>
+<p align=center>Beklenen Performans artışı görülmedi. <br>Bias riski olabilmesi ve test verisinden uzaklaşma ihtimalleri olduğu için final modelde kullanılmadı.
+</p>
+<div align=center><img width="45%" src="https://user-images.githubusercontent.com/93613110/230108601-0ca65676-178c-4484-ab7c-284da5a1475f.png"></div>
 
 ## <div align=center>Ensemble Model</div>
+<p align=center>En başarılı 3 model birleştirilerek ensemble bir model oluşturuldu. Model gelen etiketlere göre bir oylama sistemi kullanılarak(voting) final tahmini yapılmaktadır. Yapılan test sonuçlarına göre diğer modellerde 0.9311 bandında olan F1 skoru ensemble model ile 0.9391’e yükselmektedir. Bu modelin final modeli olarak kullanılması kararlaştırılmıştır.</p>
+
+<p align=center>
+Oylama Sistemi (Voting System);<br>
+1-1-1 dağılımı olursa başarı skoru en yüksek olan alınır.<br>
+1-2 dağılımı olursa modu en yüksek olan alınır.<br>
+3 model de aynı etiketi verirse sonuç etiket olarak alınır.<br>
+</p>
+
+#### <div align=center>Ensemble Model Diagram</div>
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230087470-51bab07e-45c2-4f8c-b0d9-be967b868468.png"></div>
+
+#### <div align=center>Ensemble Model Başarı Metrikleri</div>
 <div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230087724-e825dd1a-a3af-4375-a458-855e00f1e4b9.png"></div>
 
 
-## <div align=center>Final</div>
+## <div align=center></div>
 <div align=center><img width="50%" src="https://user-images.githubusercontent.com/93613110/230090373-343c0674-6cef-45e7-9b2f-817a0521ceff.png"></div>
