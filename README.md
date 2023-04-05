@@ -9,7 +9,7 @@
 - Yarışma Verisi
 - Keşifsel Veri Analizi (EDA)
   - Veri Seti İçerisindeki Sınıf Dağılımı
-  - Temizlenmiş Verilerin Token, Kelime ve Karakter Uzunluğuna Göre İncelenmesi
+  - Temizlenmiş Verilerin Karakter, Kelime ve Token Uzunluğuna Göre İncelenmesi
   - Temizlenmiş Veri Üzerindeki Stop Word lerin Analizi
   - Veri Seti İçerisindeki En Çok Geçen Kelimelerin İncelenmesi
   - nGram Analizi (n=2)
@@ -40,18 +40,24 @@
 <p align=center>Veri seti içerisinde ofansif ve ofansif olmayan verilerin dağılımı arasında bir fark olduğu gözlemlendi.<br>Target etiketleri arasında inceleme yapıldığında ise dağılımın eşit olduğu gözlemlendi.</p>
 <p align=center></p>
 
-### <div align=center>Temizlenmiş Verilerin Token, Kelime ve Karakter Uzunluğuna Göre İncelenmesi</div>
+### <div align=center>Temizlenmiş Verilerin Karakter, Kelime ve Token Uzunluğuna Göre İncelenmesi</div>
+
+#### <div align=center>Karakter Uzunlukları Grafiği</div>
 <div align=center><img width="45%" src="https://user-images.githubusercontent.com/93613110/229936466-00041f5a-e9e3-4473-aed4-45613563a1e6.png"></div>
 <p align=center>Veri seti içerisindeki ortalama metin uzunluğu 40.40. Minimum 5 karakter uzunluğunda veri bulunmaktadır. <br>Maksiumum 275 karakter uzunluğunda veri bulunmaktadır.</p>
+
+#### <div align=center>Kelime Uzunlukları Grafiği</div>
 <div align=center><img width="55%" src="https://user-images.githubusercontent.com/93613110/229936665-e92cc6e7-4dff-44c7-8066-1bd272d49e7a.png"></div>
 <p align=center>Veriler içerisindeki ortalama kelime uzunlukları incelendi. Ofansif etiketlerine ve target etiketlerine göre gruplandırılarak analizler yapıldı. Ortalama kelime uzunluklarının 5 civarı olduğu gözlemlendi.</p>
+
+#### <div align=center>Token Uzunlukları Grafiği</div>
 <div align=center><img width="35%" src="https://user-images.githubusercontent.com/93613110/229938779-ca798003-9f9d-4c9b-ad5c-8dd0f976b775.png"></div>
 <p align=center>Veri seti içerisinde 32 tokenden büyük çok az veri bulunmaktadır. 32 tokenden büyük olan verileri %95’i ‘OTHER’ sınıfına aittir. Bu nedenle tokenize etme işleminde parametre olarak maksimum token uzunluğu 32 kabul edilmiştir.</p>
 
 ### <div align=center>İşlenmemiş Veri Üzerindeki Stop Word lerin Analizi</div>
 <p align=center>Stop word ler model üzerinde etkisiz kelimelerdir. Farklı etiketler içerisinde çok fazla bulundukları için tahmin sonucunu etkilememektedir. <br><br>Stop word ler kullanılarak ve kullanmadan 2 farklı eğitim gerçekleştirildi. Eğitim sonuçları alt taraftaki görsel ile paylaşıldı. Sonuçlara ve incelemelerimize göre de tahmin üzerinde bir etkileri olmadıkları gözlemlendi.</p>
 
-#### <div align=center>Stopword Histogram</div>
+#### <div align=center>Stop Word Histogram</div>
 <div align=center><img width="60%" src="https://user-images.githubusercontent.com/93613110/229939142-cb97b8ce-9d98-4e4b-ba7b-502b08bba3c5.png"></div>
 
 #### <div align=center>Stop Word ün Başarı Metrikleri Üzerindeki Etkileri</div>
@@ -79,17 +85,17 @@
 ## <div align=center>Model Denemeleri</div>
 - Eldeki veriler ile farklı pre-trained model denemeleri yapıldı.
 - Verideki yanlış etiketlemeler düzeltilip model denemesi yapıldı. 0.04’lük bir F1 skoru artılı gözlemlendi. (tablodaki son model)
-- Binary model denemesi yapıldı. Sonuçların multi class a göre daha düşük skorlar verdiği gözlemlendi.
+- Binary model denemesi yapıldı. Sonuçların multiclass a göre daha düşük skorlar verdiği gözlemlendi.
 - Dış veri kullanılarak model denemesi yapıldı.
 
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230085141-bf5c921f-ae38-420a-97af-0c1426714101.png"></div>
 
 #### <div align=center>Binary Model Sonuçları</div>
-<div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230088439-8d8d2be9-ad73-4847-b140-04c1c31e2f18.png"></div>
 <p align=center> Binary modelde ilk aşamada verinin ofansiflik düzeyi kontrol edildi. Multiclass mimariye göre daha başarısız sonuçlar elde edildi. Ofansiflik düzeyinden sonra target etiketlerinin tahmin edilmesiyle mevcut hatanın artırımsal bir şekilde artacağı düşünülerek binary sınıflandırma yapılmadı.</p>
+<div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230088439-8d8d2be9-ad73-4847-b140-04c1c31e2f18.png"></div>
 
 #### <div align=center>Multiclass Model Sonuçları</div>
-<div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230088439-8d8d2be9-ad73-4847-b140-04c1c31e2f18.png"></div>
+
 <p align=center>Etiketlenmiş veri ile BERT [1], Roberta [2], Electra [3] gibi pre-tranied modeller kullanılarak multiclass sınıflandırma yapıldı. En başarılı 3 modelin başarı skoru test verilerinde ortalama 0.93 olarak elde edildi. Binary sınıflandırmaya göre tek aşamada tahmin yapılması ve daha yüksek başarı elde edilmesi multiclass bir model tercih etmemize neden oldu.</p>
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230086260-b96d0186-693a-4b84-aabc-0e357533e498.png"></div>
 
