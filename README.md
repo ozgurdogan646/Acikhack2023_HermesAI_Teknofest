@@ -21,6 +21,8 @@
 - Dış Veri İle Modelleme
 - Ensemble Model
 - Final
+  - Referanslar
+  - Bağımlılıklar (Dependencies)
 
 ## <div align=center>Yarışma Verisi</div>
 <p>Yarışma için paylaşılan veri seti içerisinde 12620 veri bulunmaktadır.</p>
@@ -88,7 +90,7 @@
 
 #### <div align=center>Multiclass Model Sonuçları</div>
 <div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230088439-8d8d2be9-ad73-4847-b140-04c1c31e2f18.png"></div>
-<p align=center>Target etiketleri kullanılarak multiclass sınıflandırma yapıldı. En başarılı 3 modelin başarı skoru test verilerinde ortalama 0.93 olarak elde edildi. Binary sınıflandırmaya göre tek aşamada tahmin yapılması ve daha yüksek başarı elde edilmesi multiclass bir model tercih etmemize neden oldu.</p>
+<p align=center>Etiketlenmiş veri ile BERT [1], Roberta [2], Electra [3] gibi pre-tranied modeller kullanılarak multiclass sınıflandırma yapıldı. En başarılı 3 modelin başarı skoru test verilerinde ortalama 0.93 olarak elde edildi. Binary sınıflandırmaya göre tek aşamada tahmin yapılması ve daha yüksek başarı elde edilmesi multiclass bir model tercih etmemize neden oldu.</p>
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230086260-b96d0186-693a-4b84-aabc-0e357533e498.png"></div>
 
 ## <div align=center>En Başarılı Modellerin Karmaşıklık Matrisi (Confusion Matrix)</div>
@@ -101,18 +103,18 @@
     <td>Confusion Matrix</td>
   </tr>
   <tr>
-    <td>Model-1</td>
+    <td>Model-1 [4]</td>
     <td>bert-base-turkish-cased-mean-nli-stsb-tr</td>
     <td><div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230100599-6a419d53-98ad-4c6f-a87b-4e8dbe9d5e8e.png"></div>
 </td>
   </tr>
   <tr>
-    <td>Model-2</td>
+    <td>Model-2 [5]</td>
     <td>electra-base-turkish-cased-discriminator</td>
     <td><div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230100922-fecee533-82d2-4b87-8fde-d18eb7136cbd.png"></div></td>
   </tr>
   <tr>
-    <td>Model-3</td>
+    <td>Model-3 [4]</td>
     <td>Bert-base-turkish-cased-mean-nli-stsb-tr-corrected-label</td>
     <td><div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230100968-928bae6f-60d0-4d0c-8f06-4f1b38a5f243.png"></div></td>
   </tr>
@@ -120,6 +122,8 @@
 </div>
 
 ## <div align=center>Dış Veri İle Modelleme</div>
+<p align=center>Yaptığımız araştırmalar sonucu 3 Haziran 2021 tarihinde Sheffield Üniversitesi, Alan Turing Enstitüsü ve Facebook AI ekibinin yaptığı [6] çalışma sonucunda ortaya çıkan, yaklaşık olarak 40 bin hakaret / nefret cümlesi içeren veri setini keşfettik. Yarışmamız target'ları ile tam olarak uyuşmayan bu veri setinde transformasyon işlemleri yaparak targetlerı RACIST, SEXIST, PROFANITY, INSULT, OTHER olacak şekilde güncelledik. İngilizce olan bu veri setini, pretrained bir model olan HelsinkiNLP'nin opus-mt'si ile Türkçe'ye çevirip model denemesi yaptık.
+</p>
 <div align=center><img width="45%" src="https://user-images.githubusercontent.com/93613110/230108394-6cfbcd72-3c82-47a3-901a-8aea22d27cf2.png"></div>
 <div align=center><img width="45%" src="https://user-images.githubusercontent.com/93613110/230108411-a0692c85-515c-4bf6-a37c-e02e7cac7add.png"></div>
 <p align=center>Beklenen Performans artışı görülmedi. <br>Bias riski olabilmesi ve test verisinden uzaklaşma ihtimalleri olduğu için final modelde kullanılmadı.
@@ -143,5 +147,21 @@ Oylama Sistemi (Voting System);<br>
 <div align=center><img width="40%" src="https://user-images.githubusercontent.com/93613110/230087724-e825dd1a-a3af-4375-a458-855e00f1e4b9.png"></div>
 
 
-## <div align=center></div>
+## <div align=center>Final</div>
+
+### <div>Referanslar</div>
+<p>[1] Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805.<br>
+[2] Clark, K., Luong, M. T., Le, Q. V., & Manning, C. D. (2020). Electra: Pre-training text encoders as discriminators rather than generators. arXiv preprint arXiv:2003.10555.<br>
+[3] Liu, Y., Ott, M., Goyal, N., Du, J., Joshi, M., Chen, D., ... & Stoyanov, V. (2019). Roberta: A robustly optimized bert pretraining approach. arXiv preprint arXiv:1907.11692.<br>
+[4] https://huggingface.co/emrecan/bert-base-turkish-cased-mean-nli-stsb-tr<br>
+[5] https://huggingface.co/dbmdz/electra-base-turkish-cased-discriminator<br>
+[6] Vidgen, B., Thrush, T., Waseem, Z., & Kiela, D. (2020). Learning from the worst: Dynamically generated datasets to improve online hate detection. arXiv preprint arXiv:2012.15761.</p>
+
+### <div>Bağımlılıklar (Dependencies)</div>
+```ruby
+pandas
+transformers
+gradio
+torch
+```
 <div align=center><img width="50%" src="https://user-images.githubusercontent.com/93613110/230090373-343c0674-6cef-45e7-9b2f-817a0521ceff.png"></div>
