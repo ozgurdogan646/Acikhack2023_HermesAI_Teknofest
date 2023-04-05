@@ -33,7 +33,7 @@
 
 ## <div align=center>Keşifsel Veri Analizi (EDA)</div>
 ### <div align=center>Veri Seti İçerisindeki Sınıf Dağılımı</div>
-<img width="100%" src="https://user-images.githubusercontent.com/93613110/229932943-dc899df5-b07b-49ab-9423-dd467847340e.png">
+<div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/229932943-dc899df5-b07b-49ab-9423-dd467847340e.png"></div>
 <p>Veri seti içerisinde ofansif ve ofansif olmayan verilerin dağılımı arasında bir fark olduğu gözlemlendi. Target etiketleri arasında inceleme yapıldığında ise dağılımın eşit olduğu gözlemlendi.
 
 ### <div align=center>Verilerin Token, Kelime ve Karakter Uzunluğuna Göre İncelenmesi</div>
@@ -46,16 +46,21 @@
 
 ### <div align=center>İşlenmemiş Veri Üzerindeki Stopwords'lerin Analizi</div>
 <div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/229939142-cb97b8ce-9d98-4e4b-ba7b-502b08bba3c5.png"></div>
-<div style="display: inline-block; width: 20%"><img width="20%" src="https://user-images.githubusercontent.com/93613110/229939756-2faec58a-2fef-493c-805c-a1917ff5d527.png"></div>
-<div style="display: inline-block;"><img width="20%" src="https://user-images.githubusercontent.com/93613110/229939756-2faec58a-2fef-493c-805c-a1917ff5d527.png"></div>
-<div style="display: inline-block;"><img width="20%" src="https://user-images.githubusercontent.com/93613110/229939756-2faec58a-2fef-493c-805c-a1917ff5d527.png"></div>
-<div style="display: inline-block;"><img width="20%" src="https://user-images.githubusercontent.com/93613110/229939756-2faec58a-2fef-493c-805c-a1917ff5d527.png"></div>
+<div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230078861-41c5b92a-b157-4b55-869e-a18d2e4edc2e.png"></div>
 
 ### <div align=center>Veri Seti İçerisindeki En Çok Geçen Kelimelerin İncelenmesi</div>
+<div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230078361-b1ef6782-e92c-4f6e-a6c7-9b64d058bdbf.png"></div>
+<div align=center><img width="80%" src="https://user-images.githubusercontent.com/93613110/230077967-d4941e22-0c84-459c-ae4d-5f685f620655.png"></div>
 
 ### <div align=center>nGram Analizi (n=2)</div>
+<div align=center><img width="50%" src="https://user-images.githubusercontent.com/93613110/230079454-db443f34-b7ea-4e5e-a255-075cb94847d9.png"></div>
 
 ## <div align=center>Veri Ön İşleme Aşamları</div>
+- Duplicate veriler tespit edildi ve çıkarıldı.
+- Karakterler küçük harfe dönüştürüldü.
+- Metinler içerisindeki stop word ler çıkarıldı. (nltk kütüphanesi içerisindeki türkçe stop word ler kullanıldı)
+- Bozuk veriler tespit edildi ve çıkarıldı (Örneğin sadece tek bir harften oluşan 133 adet  veri tespit edildi).
+- Metinler noktalama işareti ve ifadelerden arındırıldı. (Noktalama işaretlerine ek olarak “<”, “>” gibi ifadeler tespit edildi ve çıkartıldı. Yapılan incelemeler ile çok fazla noktalama işaretinin bulunmadığı gözlemlendi).
 
 ## <div align=center>Model Denemeleri</div>
 
